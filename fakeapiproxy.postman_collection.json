@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "f354b17b-880e-402b-a4c6-a8fdd632e58d",
+		"name": "fakeapiproxy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SetFrameworkGlobals",
+			"item": [
+				{
+					"name": "Fetch Testing Framework",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setGlobalVariable(\"module:describe-it\", responseBody);",
+									"try {",
+									"    eval(responseBody);",
+									"}",
+									"catch (e) { }",
+									"tests['Framework ready'] = (typeof describe === 'function');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://gist.githubusercontent.com/shamasis/f9eb2cb3c09f6dd3042f/raw/35bc97d25e15e3ae22017a91df655da0bd0751b5/describe-it.min.js",
+							"protocol": "https",
+							"host": [
+								"gist",
+								"githubusercontent",
+								"com"
+							],
+							"path": [
+								"shamasis",
+								"f9eb2cb3c09f6dd3042f",
+								"raw",
+								"35bc97d25e15e3ae22017a91df655da0bd0751b5",
+								"describe-it.min.js"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "{{base-url}}//api/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f121e0c3-05d4-4a96-8c69-9c299b5567b5",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"morpheus\",\n  \"job\": \"leader\"\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/api/users",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "{{base-url}}/api/users/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bab71bee-5bea-43c3-907b-8d72054b3364",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/api/users/2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{base-url}}/api/users?page=2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a19ffbe4-338b-49e4-9090-c88c341784c9",
+								"exec": [
+									"eval(postman.getGlobalVariable(\"module:describe-it\"));",
+									"",
+									"describe('GET call to users', () => {",
+									"",
+									"  it('Get single user data', function () {",
+									"    expect(responseCode.code).toEql(200);",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/api/users?page=2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
