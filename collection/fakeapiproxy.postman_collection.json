@@ -14,15 +14,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "8b72ce33-5db3-417c-add0-5dd40c6a1b62",
 								"exec": [
-									"postman.setGlobalVariable(\"module:describe-it\", responseBody);",
-									"try {",
-									"    eval(responseBody);",
-									"}",
-									"catch (e) { }",
-									"tests['Framework ready'] = (typeof describe === 'function');"
-								]
+									"postman.setGlobalVariable('postmanBDD', responseBody);"
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -39,19 +35,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://gist.githubusercontent.com/shamasis/f9eb2cb3c09f6dd3042f/raw/35bc97d25e15e3ae22017a91df655da0bd0751b5/describe-it.min.js",
-							"protocol": "https",
+							"raw": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+							"protocol": "http",
 							"host": [
-								"gist",
-								"githubusercontent",
+								"bigstickcarpet",
 								"com"
 							],
 							"path": [
-								"shamasis",
-								"f9eb2cb3c09f6dd3042f",
-								"raw",
-								"35bc97d25e15e3ae22017a91df655da0bd0751b5",
-								"describe-it.min.js"
+								"postman-bdd",
+								"dist",
+								"postman-bdd.min.js"
 							]
 						}
 					},
@@ -118,9 +111,9 @@
 							"script": {
 								"id": "bab71bee-5bea-43c3-907b-8d72054b3364",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
+									"eval(globals.postmanBDD);",
+									"",
+									"expect(response).to.have.header('content-type', 'application/json; charset=utf-8');"
 								],
 								"type": "text/javascript"
 							}
@@ -155,14 +148,9 @@
 							"script": {
 								"id": "a19ffbe4-338b-49e4-9090-c88c341784c9",
 								"exec": [
-									"eval(postman.getGlobalVariable(\"module:describe-it\"));",
+									"eval(globals.postmanBDD);",
 									"",
-									"describe('GET call to users', () => {",
-									"",
-									"  it('Get single user data', function () {",
-									"    expect(responseCode.code).toEql(200);",
-									"  });",
-									"});"
+									"expect(response).to.have.header('content-type', 'application/json; charset=utf-8');"
 								],
 								"type": "text/javascript"
 							}
@@ -170,7 +158,13 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
