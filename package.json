@@ -1,0 +1,23 @@
+{
+  "name": "postman-newman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run collection/fakeapiproxy.postman_collection.json -e env/fakeapiproxy-env.postman_environment.json -r htmlextra"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShwetankVashishtha/postman-newman-integration.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShwetankVashishtha/postman-newman-integration/issues"
+  },
+  "homepage": "https://github.com/ShwetankVashishtha/postman-newman-integration#readme",
+  "devDependencies": {
+    "newman": "4.4.0",
+    "newman-reporter-htmlextra": "1.6.7"
+  }
+}
