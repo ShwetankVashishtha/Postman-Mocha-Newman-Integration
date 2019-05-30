@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ShwetankVashishtha/postman-newman-integration#readme",
   "devDependencies": {
-    "newman": "4.4.0",
-    "newman-reporter-htmlextra": "1.6.7"
+    "newman": "4.5.0",
+    "newman-reporter-htmlextra": "1.7.4"
   }
 }
